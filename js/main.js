@@ -7,7 +7,15 @@ $(document).ready(
         $('#submit-show').bind('click', function(e)
          {
              requestedShow='';
- e AJAX call
+
+
+             e.preventDefault();
+             requestedShow=document.getElementById('requested').value;
+             requestedShow = requestedShow.replace(/\s/g, "+");
+            console.log(requestedShow);
+
+
+        //Make the AJAX call
         $.ajax('http://api.tvmaze.com/singlesearch/shows?q=' + requestedShow + '&embed=episodes', {
             method: "GET",
             dataType: "json"
