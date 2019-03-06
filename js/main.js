@@ -6,15 +6,9 @@ $(document).ready(
         let requestedShow='';
         $('#submit-show').bind('click', function(e)
          {
-
-             e.preventDefault();
-             requestedShow=document.getElementById('requested').value;
-             requestedShow = requestedShow.replace(/\s/g, "+");
-            console.log(requestedShow);
-
-
-        //Make the AJAX call
-        $.ajax('http://api.tvmaze.com/search/shows?q=' + requestedShow, {
+             requestedShow='';
+ e AJAX call
+        $.ajax('http://api.tvmaze.com/singlesearch/shows?q=' + requestedShow + '&embed=episodes', {
             method: "GET",
             dataType: "json"
         })
@@ -24,8 +18,15 @@ $(document).ready(
             .done(
                 function (data) {
                     //Add the name
-                    $('#name').append(data.name);
+                        $("name").html("");
+                        $('#name').html(data.name);
+                    $('#episodeList').html("");
+
+                    // $('#name').bind('click', function (e) {
+                    //     e.preventDefault();
+
                     //Add the episodes
+
                     data._embedded.episodes.forEach(function (episode) {
                         $('#episodeList').append('<tr>'+
                             '<td>' + episode.season + '</td>' +
@@ -34,7 +35,9 @@ $(document).ready(
                             '<td>' + episode.summary + '</td>' +
                             +' </tr>')
             })
+                              //})
         })
-         });
+             }
+         );
     }
 )
